@@ -7,19 +7,8 @@
  */
 
 session_start();
-// Se connecter à la base de données extension PDO
-// Exemple :
-//$bdd = new PDO('mysql:host=localhost;dbname=chc', 'root','')
 
-//Prévoir les erreurs de connexion
-try
-{
-	$bdd = new PDO('mysql:host=localhost;dbname=projet_inf204', 'root', '', 	array(PDO::ATTR_ERRMODE => 	PDO::ERRMODE_EXCEPTION));
-}
-catch (Exception $e)
-{
-        die('Erreur : ' . $e->getMessage());
-};
+include('inc/connect.inc.php');
 
 $nom=$_POST['nom'];
 $prenom=$_POST['prenom'];

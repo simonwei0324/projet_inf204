@@ -1,23 +1,12 @@
-<html>
-	<head>
-<title> Changement mot de passe </title>
-</head>
-<body>
+<?php
+session_start();
+@require_once("inc/autoload.inc.php");
+@include("inc/debutXHTML.inc.php");
+?>
+<?php echo "<script type='text/javascript'>update_mdp();</script>";?>
 
 <?php
-// Se connecter à la base de données extension PDO 
-// Exemple :
-//$bdd = new PDO('mysql:host=localhost;dbname=chc', 'root','')
-
-//Prévoir les erreurs de connexion
-try
-{
-	$bdd = new PDO('mysql:host=localhost;dbname=projet_inf204', 'root', '', 	array(PDO::ATTR_ERRMODE => 	PDO::ERRMODE_EXCEPTION));
-}
-catch (Exception $e)
-{
-        die('Erreur : ' . $e->getMessage());
-};
+include('inc/connect.inc.php');
 // définition de la requête
 $req_mdp = "SELECT mdp FROM particulier WHERE email = '".$_GET['util_nom']."';";
 $req_update = "UPDATE particulier SET mdp = '".md5($_GET['util_mdp_new'])."' WHERE email = '".$_GET['util_nom']."';";
@@ -33,13 +22,14 @@ $ligne = $resultat->fetch();
 if (md5($_GET['util_mdp']) == $ligne["mdp"] and md5($_GET['util_mdp_new']) == md5($_GET['mdp_new'])){
     $resultat=$bdd->query($req_update);
 	
-	echo "Le mot de passe est correct<br /> Cliquez <a href=","1projet_identification.html",">ici</a> pour acceder au site ";
+	echo "Le mot de passe est correct<br /> Cliquez <a href=","1projet_identification.php",">ici</a> pour acceder au site ";
 
 }
 else {
-	echo "Mot de passe incorect<br /><a href=","1projet_identification.html",">Reessayez</a>";
+	echo "Mot de passe incorect<br /><a href=","1projet_identification.php",">Reessayez</a>";
 }
 
-?> 
-</body>
-</html>
+?>
+<?php
+@include("inc/finXHTML.inc.php");
+?>

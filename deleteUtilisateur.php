@@ -7,20 +7,8 @@
  */
 
 session_start();
-// Se connecter à la base de données extension PDO
-// Exemple :
-//$bdd = new PDO('mysql:host=localhost;dbname=chc', 'root','')
 
-//Prévoir les erreurs de connexion
-try
-{
-    $bdd = new PDO('mysql:host=localhost;dbname=projet_inf204', 'root', '', 	array(PDO::ATTR_ERRMODE => 	PDO::ERRMODE_EXCEPTION));
-}
-catch (Exception $e)
-{
-    die('Erreur : ' . $e->getMessage());
-};
-
+include('inc/connect.inc.php');
 
     $email=$_SESSION['login_user'];
     $sql="DELETE FROM particulier WHERE email='".$email."';";
@@ -28,7 +16,7 @@ catch (Exception $e)
         echo "supprimé！<br>";
         echo "
                     <script>
-                            setTimeout(function(){window.location.href='1projet_identification.html';},1000);
+                            setTimeout(function(){window.location.href='1projet_identification.php';},1000);
                     </script>";
     }
     else {

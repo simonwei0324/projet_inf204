@@ -1,0 +1,49 @@
+body {
+font-weight: normal;
+font-family: sans-serif;
+margin-top:10em;
+margin-bottom:10em;
+margin-right:10em;
+margin-left:10em;
+}
+
+.image{
+margin-left:-5em;
+}
+
+.cartee{
+align-items: center;
+vertical-align:300px;
+}
+
+h1 {
+font-weight: bold;
+font-family:  Arial,sans-serif;
+font-variant: small-caps;
+}
+
+div.scrollmenu {  /* menu horizontale design box */
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+
+}
+
+div.scrollmenu a {  /* menu horizontal design texte */
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
+div.scrollmenu a:hover {  /* passe en couleur vert lors d'un mouseover */
+    background-color: #9ACD32		;
+}
+
+
+
+#profil {
+    background-color: #9ACD32		;
+    text-decoration: none; /* Remove underline from links */
+}

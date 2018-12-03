@@ -17,7 +17,7 @@ $password = $_POST['mdp'];
 $confirmPassword = $_POST['mdp2'];
 if ($password != $confirmPassword) {
     exit("mdp et mdp comfirmé sont pas pareils");
-    header("refresh:300;url=1projet_inscription.html");
+    header("refresh:1;url=1projet_inscription.php");
 }
 
 
@@ -33,34 +33,36 @@ $mdp=md5($_POST['mdp']);
 
 
 
-include('connect.php');//connextion à la base de données
-$userNameSQL =null;
+include('connect.inc.php');//connextion à la base de données
+
 
 $useremailSQL = "select * from particulier where email = '".$email."'";
-$resultSet = mysqli_query($con,$useremailSQL);
-if ($resultSet) {
+$resultSet=$bdd->query($useremailSQL);
+$rows=$resultSet->fetchAll();
+$rowCount=count($rows);
+if ($rowCount>0) {
 
-    exit("email de client déja existé");
+    echo "email de client déja existé";
 
-    echo "
+
+    exit( "
                       <script>
-                            setTimeout(function(){window.location.href='1projet_inscription.html';},1000);
-                      </script>";
+                            setTimeout(function(){window.location.href='1projet_inscription.php';},1000);
+                      </script>");
+
 
 }
 
-
-$q="insert into particulier(nom,prenom,departement,codepostal,ville,email,tel,mdp)
+    $q = "insert into particulier(nom,prenom,departement,codepostal,ville,email,tel,mdp)
     values ('$nom','$prenom','$departement','$codepostal','$ville','$email','$tel','$mdp')";//向数据库插入表单传来的值的sql
-$reslut=mysqli_query($con,$q);//excuter sql
 
-if (!$reslut){
-    die('Error: ' . mysqli_error());// si sql échoué ,imprimer erreur
-}else{
-    echo "enregistré";
-    header("refresh:300;url=1projet_identification.html");
-}
+    $result = $bdd->exec($q);
+    if (!$result) {
+        die('Error: ' . die('Erreur : ' . $e->getMessage()));// si sql échoué ,imprimer erreur
+    } else {
+        echo "enregistré";
+        header("refresh:1;url=1projet_identification.php");
+    }
 
 
 
-mysqli_close($con);
